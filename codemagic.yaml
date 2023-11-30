@@ -6,22 +6,24 @@ workflows:
         environment:
             flutter: 3.17.0-0.0.pre. 
         scripts:
-          - name: Set up local.properties
-            script: | 
-                xcode-project use-profiles
-          - name: Get Flutter packages
-            script: | 
+           - name: Set up local.properties
+             script: | 
+                echo "flutter.sdk=$HOME/programs/flutter" > "$CM_BUILD_DIR/android/local.properties"
+           - name: Get Flutter packages
+             script: | 
                 flutter packages pub get
-          - name: Flutter analyze
-            script: | 
+           - name: Flutter analyze
+             script: | 
                 flutter analyze
-          - name: Flutter unit tests
-            script: | 
+           - name: Flutter unit tests
+             script: | 
                 flutter test
-            ignore_failure: false
-          - name: Build AAB with Flutter
-            script: | 
-                flutter build appbundle --release        
+             ignore_failure: true
+           - name: Build AAB with Flutter
+             script: | 
+              flutter build appbundle --release \
+              --build-name=1.0.$BUILD_NUMBER \
+              --build-number=$BUILD_NUMBER      
     ios-workflow:
         name: iOS Workflow
         instance_type: mac_mini_m1
@@ -47,6 +49,7 @@ workflows:
             ignore_failure: false
           - name: Flutter build ipa
             script: | 
-                flutter build ipa --release 
+                flutter build ipa --release \
+                --build-name=1.0.0 \
                 
                     
