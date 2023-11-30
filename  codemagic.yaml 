@@ -1,0 +1,11 @@
+workflows:
+    android-workflow:
+        name: Android Workflow
+        instance_type: mac_mini_m1
+        max_build_duration: 120
+        environment:
+            flutter: stable    
+      ios-workflow:
+        name: iOS Workflow
+        instance_type: mac_mini_m1
+        max_build_duration: 120        
