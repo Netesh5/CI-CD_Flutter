@@ -38,10 +38,9 @@ workflows:
             # ios_signing:
             #   distribution_type: app_store 
             #   bundle_identifier: com.redstone.store.app 
-            vars:
+           # vars:
               #APP_ID: RVPCR86QJ7.com.redstone.store.app  
-              BUILD_NAME: true
-              BUILD_NUMBER: true
+              
         # cache:
         #       cache_paths:
         #         - ~/.cocoapods/repos
