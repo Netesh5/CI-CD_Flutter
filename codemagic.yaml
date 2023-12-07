@@ -57,9 +57,8 @@ workflows:
                 build_number=$(grep 'version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 2 | tr -d ' ')
               fi
 
-              export BUILD_NAME=$build_name
-              export BUILD_NUMBER=$build_number
-
+              --export BUILD_NAME=$build_name
+              --export BUILD_NUMBER=$build_number
 
               echo "Build Name: $BUILD_NAME"
               echo "Build Number: $BUILD_NUMBER"
