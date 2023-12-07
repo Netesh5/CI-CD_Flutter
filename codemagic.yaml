@@ -50,7 +50,7 @@ workflows:
           - name: Extract app version and build number
             script: |
               build_name=$(grep 'version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 1 | tr -d ' ')
-              
+
               if [[ -z "$(grep '+' pubspec.yaml)" ]]; then
                 build_number="0"
               else
@@ -59,6 +59,10 @@ workflows:
 
               export BUILD_NAME=$build_name
               export BUILD_NUMBER=$build_number
+
+
+              echo "Build Name: $BUILD_NAME"
+              echo "Build Number: $BUILD_NUMBER"
            
           - name: Set up code signing settings on Xcode project
             script: | 
