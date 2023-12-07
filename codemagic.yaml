@@ -47,23 +47,14 @@ workflows:
         #         - ~/.cocoapods/repos
         #         - ~/.cache/dart-sdk
         #         - ~/.pub-cache
-        # triggering:
-        #   events:
-        #      - push        
+        triggering:
+          events:
+             - push 
+          branch_patterns:
+            - pattern: "master"
+              include: true
+          cancel_previous_builds: true       
         scripts:  
-          - name: Extract app version and build number
-            script: |
-             export BUILD_NAME=$(grep 'version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 1 | tr -d ' ')
-
-              if [[ -z "$(grep '+' pubspec.yaml)" ]]; then
-                export  BUILD_NUMBER="0"
-              else
-                export BUILD_NUMBER=$(grep 'version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 2 | tr -d ' ')
-              fi
-
-              echo "Build Name: $BUILD_NAME"
-              echo "Build Number: $BUILD_NUMBER"
-           
           - name: Set up code signing settings on Xcode project
             script: | 
                 xcode-project use-profiles
@@ -90,8 +81,6 @@ workflows:
                   export BUILD_NUMBER=$(grep 'version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 2 | tr -d ' ')
                 fi
 
-                echo "Build Name: $BUILD_NAME"
-                echo "Build Number: $BUILD_NUMBER"
               flutter build ipa --release \
                --build-name=$BUILD_NAME \
                --build-number=$BUILD_NUMBER \
