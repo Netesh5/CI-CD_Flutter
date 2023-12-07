@@ -10,10 +10,12 @@ else
   build_number=$(grep 'version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 2 | tr -d ' ')
 fi
 
-# Export app version and build number as environment variables
-export BUILD_NAME=$build_name
-export BUILD_NUMBER=$build_number
 
 
 echo "Build Name:$build_name"
 echo "Build Number:$build_number"
+
+# Export app version and build number as environment variables
+export BUILD_NAME=$build_name
+export BUILD_NUMBER=$build_number
+

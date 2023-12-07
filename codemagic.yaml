@@ -49,7 +49,7 @@ workflows:
         scripts:  
           - name: Extract app version and build number
             script: |
-              ./app_version.sh
+           
                output=$(./app_version.sh)
                echo "Output: $output"
            
