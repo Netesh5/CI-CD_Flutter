@@ -82,8 +82,16 @@ workflows:
             ignore_failure: false
           - name: Flutter build ipa
             script: | 
-             echo "Build Name: $BUILD_NAME"
-             echo "Build Number: $BUILD_NUMBER"
+              export BUILD_NAME=$(grep 'version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 1 | tr -d ' ')
+
+                if [[ -z "$(grep '+' pubspec.yaml)" ]]; then
+                  export  BUILD_NUMBER="0"
+                else
+                  export BUILD_NUMBER=$(grep 'version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 2 | tr -d ' ')
+                fi
+
+                echo "Build Name: $BUILD_NAME"
+                echo "Build Number: $BUILD_NUMBER"
               flutter build ipa --release \
                --build-name=$BUILD_NAME \
                --build-number=$BUILD_NUMBER \
