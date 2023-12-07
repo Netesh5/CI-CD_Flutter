@@ -13,3 +13,7 @@ fi
 # Export app version and build number as environment variables
 export BUILD_NAME=$build_name
 export BUILD_NUMBER=$build_number
+
+
+echo "Build Name:$build_name"
+echo "Build Number:$build_number"
