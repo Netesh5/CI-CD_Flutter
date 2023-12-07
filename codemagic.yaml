@@ -49,9 +49,9 @@ workflows:
         scripts:  
           - name: Extract app version and build number
             script: |
-           
-               output=$(./app_version.sh)
-               echo "Output: $output"
+               ./app_version.sh
+               echo "Build Name: $BUILD_NAME"
+               echo "Build Number: $BUILD_NUMBER"
            
           - name: Set up code signing settings on Xcode project
             script: | 
