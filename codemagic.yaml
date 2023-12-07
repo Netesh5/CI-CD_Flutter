@@ -49,16 +49,13 @@ workflows:
         scripts:  
           - name: Extract app version and build number
             script: |
-              build_name=$(grep 'version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 1 | tr -d ' ')
+             export BUILD_NAME=$(grep 'version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 1 | tr -d ' ')
 
               if [[ -z "$(grep '+' pubspec.yaml)" ]]; then
-                build_number="0"
+                export  BUILD_NUMBER="0"
               else
-                build_number=$(grep 'version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 2 | tr -d ' ')
+                export BUILD_NUMBER=$(grep 'version:' pubspec.yaml | awk '{print $2}' | cut -d '+' -f 2 | tr -d ' ')
               fi
-
-              --export BUILD_NAME=$build_name
-              --export BUILD_NUMBER=$build_number
 
               echo "Build Name: $BUILD_NAME"
               echo "Build Number: $BUILD_NUMBER"
