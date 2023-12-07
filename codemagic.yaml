@@ -51,8 +51,6 @@ workflows:
             script: |
               ./app_version.sh
                output=$(./app_version.sh)
-               echo "Build Name:  $BUILD_NAME"
-               echo "Build Number: $BUILD_NUMBER"
                echo "Output: $output"
            
           - name: Set up code signing settings on Xcode project
