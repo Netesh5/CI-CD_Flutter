@@ -50,8 +50,8 @@ workflows:
           - name: Extract app version and build number
             script: |
                ./app_version.sh
-               echo "Build Name: $BUILD_NAME"
-               echo "Build Number: $BUILD_NUMBER"
+               echo "Build Name: $(FLUTTER_BUILD_NAME)"
+               echo "Build Number: $(FLUTTER_BUILD_NUMBER)"
            
           - name: Set up code signing settings on Xcode project
             script: | 
