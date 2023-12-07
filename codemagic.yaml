@@ -5,6 +5,7 @@ workflows:
         max_build_duration: 120
         environment:
             flutter: stable 
+         
         scripts:
            - name: Set up local.properties
              script: | 
@@ -33,11 +34,14 @@ workflows:
             flutter: stable
             xcode: 15.0 
             cocoapods: default
+            
             # ios_signing:
             #   distribution_type: app_store 
             #   bundle_identifier: com.redstone.store.app 
-            # vars:
-            #   APP_ID: RVPCR86QJ7.com.redstone.store.app  
+            vars:
+              #APP_ID: RVPCR86QJ7.com.redstone.store.app  
+              BUILD_NAME: true
+              BUILD_NUMBER: true
         # cache:
         #       cache_paths:
         #         - ~/.cocoapods/repos
