@@ -53,7 +53,7 @@ workflows:
           events:
             - pull_request
           branch_patterns:
-          - pattern: "!master"
+          - pattern: "master"
             include: true
             source: true
       
@@ -61,7 +61,7 @@ workflows:
 
 
 
-      #hello haha
+      #hello haha haha
         scripts:  
           - name: Set up code signing settings on Xcode project
             script: | 
