@@ -74,7 +74,7 @@ workflows:
                   exit 0
                 fi
                   echo "Merging into master, triggering build."
-                    
+                        
             
           - name: Set up code signing settings on Xcode project
             script: | 
