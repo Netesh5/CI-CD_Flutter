@@ -49,47 +49,15 @@ workflows:
         #         - ~/.pub-cache    
 
 
-
-
-        # triggering:
-        #   events:
-        #      - pull_request
-        #   branch_patterns:
-        #       - pattern: 'master'
-        #         include: true
         triggering:
           events:
             - pull_request
           branch_patterns:
-          - pattern: "*"
+          - pattern: "master"
             include: true
+            source: true
 
         scripts:  
-          - name: Check merge target branch, status, type, source branch, and closed status
-            script: |
-              target_branch=$(git log -n 1 --pretty=%B | grep -Eo "Merge pull request #\d+ into (.*)")
-              merge_status=$(git log -n 1 --pretty=%B | grep -Eo "(?<=merged\s+)(?:success|failure)")
-              commit_type=$(git log -n 1 --pretty=%B | grep -i "(?i)\bmerge commit\b")
-              source_branch=$(git log -n 1 --pretty=%B | grep -Eo "from\s+(.+)\b")
-              is_closed=$(git log -n 1 --pretty=%B | grep -Eo "Closed pull request #\d+")
-              
-              if [ "$target_branch" != "master" ]; then
-                echo "Skipping build as this is not a merge into master."
-                exit 0
-              elif [ -z "$commit_type" ]; then
-                echo "Skipping build as this is not a merge commit."
-                exit 0
-              elif [ "$merge_status" != "success" ]; then
-                echo "Skipping build as the merge into master was not successful."
-                exit 0
-              elif [ "$source_branch" == "master" ]; then
-                echo "Skipping build as this is a push directly to master, not a merge."
-                exit 0
-              elif [ -z "$is_closed" ]; then
-                echo "Skipping build as the pull request is not yet closed."
-                exit 0
-              fi  
-            
           - name: Set up code signing settings on Xcode project
             script: | 
                 xcode-project use-profiles
