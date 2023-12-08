@@ -67,11 +67,12 @@ workflows:
         scripts:  
           - name: Check merge target branch, status, type, source branch, and closed status
             script: |
-              target_branch=$(git log -n 1 --pretty=%B | grep -Eo "Merge pull request #+ into (.*)")
-              merge_status=$(git log -n 1 --pretty=%B | grep -Eo "(?<=merged\s+)(success|failure)")
-              commit_type=$(git log -n 1 --pretty=%B | grep -i "merge commit")
-              source_branch=$(git log -n 1 --pretty=%B | grep -Eo "from\s+(.*+) ")
-              is_closed=$(git log -n 1 --pretty=%B | grep -Eo "Closed pull request #([0-9]+)")
+              target_branch=$(git log -n 1 --pretty=%B | grep -Eo "Merge pull request #\d+ into (.*)")
+              merge_status=$(git log -n 1 --pretty=%B | grep -Eo "(?<=merged\s+)(?:success|failure)")
+              commit_type=$(git log -n 1 --pretty=%B | grep -i "(?i)\bmerge commit\b")
+              source_branch=$(git log -n 1 --pretty=%B | grep -Eo "from\s+(.+)\b")
+              is_closed=$(git log -n 1 --pretty=%B | grep -Eo "Closed pull request #\d+")
+              
               if [ "$target_branch" != "master" ]; then
                 echo "Skipping build as this is not a merge into master."
                 exit 0
@@ -87,8 +88,7 @@ workflows:
               elif [ -z "$is_closed" ]; then
                 echo "Skipping build as the pull request is not yet closed."
                 exit 0
-              fi
-              echo "Successful merge into master from $source_branch, triggering build."  
+              fi  
             
           - name: Set up code signing settings on Xcode project
             script: | 
