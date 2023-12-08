@@ -58,23 +58,26 @@ workflows:
         #       - pattern: 'master'
         #         include: true
         triggering:
-               events:
-                 - pull_request
-               branch_patterns:
-                  - pattern: "master"
-                    include: true
-               cancel_previous_builds: true    
-                     
+          events:
+            - pull_request
+          branch_patterns:
+          - pattern: "*"
+            include: true
+     
+            
         scripts:  
-          - name: Check merge target branch
+          - name: Check merge target branch and status
             script: |
-                target_branch=$(git log -n 1 --pretty=%B | grep -Eo "Merge pull request #[0-9]+ into (.*)")
-                if [ "$target_branch" != "master" ]; then
-                  echo "Skipping build as this is not a merge into master."
-                  exit 0
-                fi
-                  echo "Merging into master, triggering build."
-                        
+              target_branch=$(git log -n 1 --pretty=%B | grep -Eo "Merge pull request #[0-9]+ into (.*)")
+              merge_status=$(git log -n 1 --pretty=%B | grep -Eo "(?<=merged\s+)(success|failure)")
+              if [ "$target_branch" != "master" ]; then
+                echo "Skipping build as this is not a merge into master."
+                exit 0
+              elif [ "$merge_status" != "success" ]; then
+                echo "Skipping build as the merge into master was not successful."
+                exit 0
+              fi
+              echo "Successful merge into master, triggering build."         
             
           - name: Set up code signing settings on Xcode project
             script: | 
