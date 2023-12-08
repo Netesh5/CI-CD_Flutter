@@ -63,7 +63,7 @@ workflows:
                branch_patterns:
                   - pattern: "master"
                     include: true
-               cancel_previous_builds: true 
+               cancel_previous_builds: true    
                      
         scripts:  
           - name: Check merge target branch
@@ -74,7 +74,7 @@ workflows:
                   exit 0
                 fi
                   echo "Merging into master, triggering build."
-                    
+                        
             
           - name: Set up code signing settings on Xcode project
             script: | 
