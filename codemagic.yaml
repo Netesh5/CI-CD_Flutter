@@ -78,7 +78,7 @@ workflows:
               elif [ -z "$commit_type" ]; then
                 echo "Skipping build as this is not a merge commit."
                 exit 0
-              elif [ "$merge_status" != "success" ]; then
+              elif [ "$merge_status" != "success" ]; then   
                 echo "Skipping build as the merge into master was not successful."
                 exit 0
               elif [ "$source_branch" == "master" ]; then
