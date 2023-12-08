@@ -65,12 +65,13 @@ workflows:
             include: true
 
         scripts:  
-          - name: Check merge target branch, status, type, and source branch
+          - name: Check merge target branch, status, type, source branch, and closed status
             script: |
-              target_branch=$(git log -n 1 --pretty=%B | grep -Eo "Merge pull request #+ into (.*)")
+              target_branch=$(git log -n 1 --pretty=%B | grep -Eo "Merge pull request #[0-9]+ into (.*)")
               merge_status=$(git log -n 1 --pretty=%B | grep -Eo "(?<=merged\s+)(success|failure)")
               commit_type=$(git log -n 1 --pretty=%B | grep -i "merge commit")
               source_branch=$(git log -n 1 --pretty=%B | grep -Eo "from\s+(.*?) ")
+              is_closed=$(git log -n 1 --pretty=%B | grep -Eo "Closed pull request #[0-9]+")
               if [ "$target_branch" != "master" ]; then
                 echo "Skipping build as this is not a merge into master."
                 exit 0
@@ -83,8 +84,11 @@ workflows:
               elif [ "$source_branch" == "master" ]; then
                 echo "Skipping build as this is a push directly to master, not a merge."
                 exit 0
+              elif [ -z "$is_closed" ]; then
+                echo "Skipping build as the pull request is not yet closed."
+                exit 0
               fi
-              echo "Successful merge into master, triggering build."   
+              echo "Successful merge into master from $source_branch, triggering build."  
             
           - name: Set up code signing settings on Xcode project
             script: | 
