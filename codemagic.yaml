@@ -55,7 +55,7 @@ workflows:
           branch_patterns:
           - pattern: 'master'
             source: false
-            include: true  
+            include: true    
 
             
             
