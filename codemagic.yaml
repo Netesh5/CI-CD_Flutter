@@ -55,9 +55,13 @@ workflows:
           branch_patterns:
           - pattern: 'master'
             include: true
-            source: false
-        when:
-          condition: event.pull_request.merged
+            source: true
+
+            
+            
+
+
+
 
 
         scripts:  
