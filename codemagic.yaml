@@ -48,7 +48,6 @@ workflows:
         #         - ~/.cache/dart-sdk
         #         - ~/.pub-cache    
 
-
         triggering:
           events:
             - pull_request
