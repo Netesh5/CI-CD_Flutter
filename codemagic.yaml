@@ -61,10 +61,9 @@ workflows:
           events:
             - pull_request
           branch_patterns:
-            - pattern: 'master'
-              include: true
-              source: false
-
+          - pattern: 'master'
+            include: true
+            source: true
 
         scripts:  
           - name: Set up code signing settings on Xcode project
