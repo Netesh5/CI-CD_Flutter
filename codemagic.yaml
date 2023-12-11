@@ -49,12 +49,13 @@ workflows:
         #         - ~/.pub-cache    
 
         triggering:
-          events:
-            - pull_request
-          branch_patterns:
-          - pattern: 'master'
-            include: true
-            source: true
+            events:
+               - pull_request
+            branch_patterns:
+              - pattern: 'master'
+                source: true
+    
+          
 
 
 
