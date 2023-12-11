@@ -63,7 +63,7 @@ workflows:
           branch_patterns:
           - pattern: 'master'
             include: true
-            source: true
+            source: false
         when:
           condition: event.event.pull_request.merged
 
