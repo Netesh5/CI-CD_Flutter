@@ -57,8 +57,6 @@ workflows:
             include: true 
         when:
           condition: event.pull_request.merged
-            
-          
 
             
             
