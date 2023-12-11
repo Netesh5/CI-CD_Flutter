@@ -54,7 +54,6 @@ workflows:
             - pull_request
           branch_patterns:
           - pattern: 'master'
-            source: true
             include: true 
         when:
           condition: event.pull_request.merged
