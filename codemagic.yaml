@@ -48,7 +48,6 @@ workflows:
         #         - ~/.cache/dart-sdk
         #         - ~/.pub-cache    
 
-
         triggering:
           events:
             - pull_request
@@ -56,8 +55,7 @@ workflows:
           - pattern: 'master'
             include: true
             source: true
-          
-      #hello haha
+
         scripts:  
           - name: Set up code signing settings on Xcode project
             script: | 
