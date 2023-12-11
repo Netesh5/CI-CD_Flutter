@@ -50,13 +50,17 @@ workflows:
 
 
         triggering:
-            events:
-               - pull_request
-            branch_patterns:
-              - pattern: 'master'
-                source: true
-                include: true
-                
+          events:
+            - pull_request
+          branch_patterns:
+          - pattern: 'master'
+            source: false
+            include: true  
+
+            
+            
+
+
 
 
 
