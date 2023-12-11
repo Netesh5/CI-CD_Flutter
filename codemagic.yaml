@@ -54,7 +54,7 @@ workflows:
             - pull_request
           branch_patterns:
           - pattern: 'master'
-            source: false
+            source: true
             include: true
 
             
