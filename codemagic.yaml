@@ -56,9 +56,6 @@ workflows:
           - pattern: 'master'
             include: true
             source: true
-            
-
-
 
         scripts:  
           - name: Set up code signing settings on Xcode project
