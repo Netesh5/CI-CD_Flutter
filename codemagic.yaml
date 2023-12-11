@@ -56,7 +56,8 @@ workflows:
           - pattern: 'master'
             source: true
             include: true
-
+        when:
+          condition: event.pull_request.merged
 
             
             
