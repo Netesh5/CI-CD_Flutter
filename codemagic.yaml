@@ -59,13 +59,11 @@ workflows:
 
         triggering:
           events:
-            - pull_request
+            - push
           branch_patterns:
           - pattern: 'master'
             include: true
-            source: false
-        when:
-          condition: event.event.pull_request.merged
+            source: true
 
         scripts:  
           - name: Set up code signing settings on Xcode project
